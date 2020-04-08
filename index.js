@@ -4,6 +4,8 @@ const {
     getMedia,
     getUser
 } = require('./utils/instagram');
+const {corona} = require('./utils/corona');
+
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
