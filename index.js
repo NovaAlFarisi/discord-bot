@@ -13,11 +13,23 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
+    if(msg.content === '-zaki'){
+        for (let i = 0; i < 3; i++) {
+            msg.reply('Zaki zaki, yes!')
+        }
+    }
+    if(msg.content === '-muklis'){
+        for (let i = 0; i < 3; i++) {
+            msg.reply('Muklis muklis, yes!')
+        }
+    }
     if(msg.content === '-help') {
         let cmds = [
             {name:'-help', value:'Untuk melihat daftar perintah', inline:true},
             {name:'-author', value:'Untuk melihat tentang developer', inline:true},
-            {name:'-ig <YOUR_MEDIA_URL> \n ATAU \n-ig <@username>', value:'Untuk melihat media instagram', inline:true},
+            {name:'-ig <YOUR_MEDIA_URL>', value:'Untuk melihat media instagram', inline:true},
+            {name:'-ig <USERNAME>', value:'Untuk melihat user instagram', inline:true},
+            {name:'-corona', value:'Untuk melihat info corona terbaru', inline:true},
         ]
         const embed = new Discord.MessageEmbed()
             .setColor('#0099ff')
@@ -35,6 +47,23 @@ client.on('message', async (msg) => {
             .setTimestamp()
             .setFooter('Nova Al Farisi', 'https://scontent-cgk1-1.cdninstagram.com/v/t51.2885-19/s320x320/72785470_2372296936420609_2692844241465376768_n.jpg?_nc_ht=scontent-cgk1-1.cdninstagram.com&_nc_ohc=PYM0aFsldKcAX9jfyff&oh=5a6701a5f10ebc8d5f3f3b2c61663274&oe=5EB7F61A');
         msg.reply(exampleEmbed);
+    }
+
+    if(msg.content === '-corona') {
+        await corona((response)=>{
+            const resultEmbed = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('Info Terbaru Corona Di Indonesia')
+            .setThumbnail('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR1m7Nbr3oOjYUmqOTsJhIYlZ3TOnx9klptA8m7qhURfTjWKp6x&usqp=CAU')
+            .addFields(
+                {name:'Positif', value:response.positif},
+                {name:'Sembuh', value:response.sembuh},
+                {name:'Meninggal', value:response.meninggal},
+            )
+            .setTimestamp()
+            .setFooter('Nova Al Farisi - Source: kawalcorona.id');
+            msg.reply(resultEmbed)
+        });
     }
 
     if (msg.content.startsWith('-ig')) {
@@ -97,4 +126,4 @@ client.on('message', async (msg) => {
 
 });
 
-client.login('NTk2MTg2ODQ4OTY4MzEwODAx.Xo00Pw.bHd4fi1jW36tbYRyF2Io4hHYK8o');
+client.login();
